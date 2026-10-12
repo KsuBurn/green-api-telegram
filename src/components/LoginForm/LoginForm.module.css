@@ -1,0 +1,49 @@
+.loginPage {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    background: #fff;
+}
+.loginCard {
+    width: min(100%, 440px);
+    padding: 36px;
+}
+.telegram {
+    color: #3390ec;
+    font-size: 64px;
+}
+.eyebrow {
+    color: #3390ec;
+    letter-spacing: 1.7px;
+    font-size: 10px;
+    font-weight: 700;
+}
+.intro {
+    margin-bottom: 28px;
+}
+.fieldHelp {
+    font-size: 12px;
+}
+.errorBlock {
+    margin-bottom: 16px;
+}
+.securityNote {
+    color: #8a9095;
+    font-size: 11px;
+    text-align: center;
+    line-height: 1.7;
+    margin: 22px 0 0;
+}
+.loginFooter {
+    font-size: 11px;
+    color: #8a9095;
+    margin-top: 24px;
+}
+@media (max-width: 600px) {
+    .loginCard {
+        padding: 24px 8px;
+    }
+}

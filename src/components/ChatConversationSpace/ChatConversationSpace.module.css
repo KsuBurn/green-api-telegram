@@ -1,0 +1,10 @@
+.conversation {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    background-color: #c7dbba;
+    background-image:
+            url('../assets/chat-pattern.svg'),
+            linear-gradient(135deg, #d9deb0 0%, #a7cbaa 48%, #d4dfa9 100%);
+}
