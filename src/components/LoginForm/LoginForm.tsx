@@ -1,9 +1,45 @@
-import type { FC } from 'react';
+import { type FC, useRef, useState } from 'react';
 import styles from './LoginForm.module.css';
 import { Button, Form, Input, Typography } from 'antd';
 import { TelegramFilled } from '@ant-design/icons';
+import type { Credentials } from '../../types.ts';
+import { greenApi } from '../../api/greenApi.ts';
+import { errorMessage } from '../../utils/validation.ts';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage.tsx';
 
-export const LoginForm: FC = () => {
+interface LoginFormProps {
+    onConnect: () => void;
+}
+
+export const LoginForm: FC<LoginFormProps> = ({ onConnect }) => {
+    const [isConnecting, setIsConnecting] = useState(false);
+    const [error, setError] = useState('');
+    const connectionLock = useRef(false);
+
+    const handleConnect = async (values: Credentials) => {
+        if (connectionLock.current) {
+            return;
+        }
+        connectionLock.current = true;
+        setIsConnecting(true);
+        setError('');
+        try {
+            greenApi.configure({
+                idInstance: values.idInstance.trim(),
+                apiTokenInstance: values.apiTokenInstance.trim(),
+                apiUrl: values.apiUrl.trim(),
+            });
+            await greenApi.connect(new AbortController().signal);
+            onConnect();
+        } catch (err) {
+            greenApi.clearSession();
+            setError(errorMessage(err));
+        } finally {
+            connectionLock.current = false;
+            setIsConnecting(false);
+        }
+    }
+
     return (
         <main className={styles.loginPage}>
             <section className={styles.loginCard}>
@@ -18,9 +54,9 @@ export const LoginForm: FC = () => {
                     layout="vertical"
                     requiredMark={false}
                     size="large"
-                    // disabled={isConnecting}
+                    disabled={isConnecting}
                     initialValues={{ apiUrl: 'https://4100.api.green-api.com' }}
-                    // onFinish={handleConnect}
+                    onFinish={handleConnect}
                 >
                     <Form.Item
                         name="idInstance"
@@ -52,7 +88,7 @@ export const LoginForm: FC = () => {
                         Скопируйте idInstance, apiTokenInstance и apiUrl из кабинета GREEN-API для
                         Telegram.
                     </Typography.Paragraph>
-                    {/*{error && <ErrorMessage className={styles.errorBlock}>{error}</ErrorMessage>}*/}
+                    {error && <ErrorMessage className={styles.errorBlock}>{error}</ErrorMessage>}
                     <Button type="primary" htmlType="submit" block>
                         Подключить Telegram
                     </Button>

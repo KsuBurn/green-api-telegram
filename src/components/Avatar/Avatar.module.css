@@ -1,0 +1,5 @@
+.avatar {
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #70b6f2, #438bda);
+    font-weight: 500;
+}

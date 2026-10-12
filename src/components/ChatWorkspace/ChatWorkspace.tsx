@@ -1,17 +1,35 @@
 import { type FC, useState } from 'react';
 
 import { Badge, Button } from 'antd';
-import {
-    PlusOutlined,
-    TelegramFilled,
-} from '@ant-design/icons';
+import { PlusOutlined, TelegramFilled } from '@ant-design/icons';
 import styles from './ChatWorkspace.module.css';
-import { ChatConversationSpace } from '../ChatConversationSpace/ChatConversationSpace.tsx'
-import { CreateNewChatForm } from '../CreateNewChatForm/CreateNewChatForm.tsx'
-import { ChatsList } from '../ChatsList/ChatsList.tsx'
+import { ChatConversationSpace } from '../ChatConversationSpace/ChatConversationSpace.tsx';
+import { CreateNewChatForm } from '../CreateNewChatForm/CreateNewChatForm.tsx';
+import { ChatsList } from '../ChatsList/ChatsList.tsx';
+import { useChat } from '../../hooks/useChat.ts';
 
-export const ChatWorkspace: FC = () => {
-    const [showNewChatForm, setSowNewChatForm] = useState(false);
+interface ChatWorkspaceProps {
+    onLogout: () => void;
+}
+
+export const ChatWorkspace: FC<ChatWorkspaceProps> = ({ onLogout }) => {
+    const {
+        chats,
+        activeId,
+        setActiveId,
+        createChat,
+        send,
+        sending,
+        sendError,
+        pollError,
+        stopped,
+        restartPolling,
+    } = useChat();
+
+    const [showNewChatForm, setShowNewChatForm] = useState(false);
+
+    const chat = chats.find((item) => item.id === activeId);
+
     return (
         <main className={styles.workspace}>
             <aside className={styles.sidebar}>
@@ -32,21 +50,34 @@ export const ChatWorkspace: FC = () => {
                         icon={<PlusOutlined />}
                         title="Новый чат"
                         aria-label="Новый чат"
-                        onClick={() => setSowNewChatForm((value) => !value)}
+                        onClick={() => setShowNewChatForm((value) => !value)}
                     />
                 </div>
-                {showNewChatForm &&
-                    <CreateNewChatForm />
-                }
-                <ChatsList/>
+                {showNewChatForm && (
+                    <CreateNewChatForm
+                        createChat={createChat}
+                        setShowNewChatForm={setShowNewChatForm}
+                    />
+                )}
+                <ChatsList chats={chats} activeId={activeId} setActiveId={setActiveId} />
                 <footer className={styles.sidebarFooter}>
                     <Badge />
-                    <Button type="link" className={styles.textButton}>
+                    <Button type="link" className={styles.textButton} onClick={onLogout}>
                         Выйти
                     </Button>
                 </footer>
             </aside>
-            <ChatConversationSpace />
+            <ChatConversationSpace
+                chat={chat}
+                pollError={pollError}
+                send={send}
+                sendError={sendError}
+                sending={sending}
+                stopped={stopped}
+                restartPolling={restartPolling}
+                setShowNewChatForm={setShowNewChatForm}
+                setActiveId={setActiveId}
+            />
         </main>
     );
 };
