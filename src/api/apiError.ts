@@ -1,10 +1,11 @@
 export class ApiError extends Error {
-    constructor(
-        message: string,
-        public readonly status = 0,
-    ) {
+    public readonly status: number;
+
+    constructor(message: string, status = 0) {
         super(message);
+
         this.name = 'ApiError';
+        this.status = status;
     }
 
     get fatal() {
