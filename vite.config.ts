@@ -4,4 +4,5 @@ import { defineConfig } from 'vite';
 // Документация по настройке Vite: https://vite.dev/config/
 export default defineConfig({
     plugins: [react()],
+    base: '/green-api-telegram/'
 });
