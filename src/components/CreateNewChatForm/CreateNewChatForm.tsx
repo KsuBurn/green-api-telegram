@@ -35,7 +35,7 @@ export const CreateNewChatForm: FC<CreateNewChatFormProps> = ({
             creatingLock.current = false;
             setCreating(false);
         }
-    }
+    };
 
     return (
         <Form

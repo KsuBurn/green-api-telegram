@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import styles from './ChatsList.module.css';
 import { Button, Empty } from 'antd';
 import type { Chat } from '../../types.ts';
-import { Avatar } from '../Avatar/Avatar.tsx'
+import { Avatar } from '../Avatar/Avatar.tsx';
 
 interface ChatsListProps {
     chats: Chat[];
@@ -29,8 +29,10 @@ export const ChatsList: FC<ChatsListProps> = ({ chats, activeId, setActiveId }) 
                     >
                         <Avatar name={item.name} />
                         <span className={styles.chatSummary}>
-                            <strong>{item.name}</strong>
-                            <span>{item.messages.at(-1)?.text ?? 'Пока нет сообщений'}</span>
+                            <span className={styles.chatName}>{item.name}</span>
+                            <span className={styles.chatPreview}>
+                                {item.messages.at(-1)?.text ?? 'Пока нет сообщений'}
+                            </span>
                         </span>
                     </Button>
                 ))

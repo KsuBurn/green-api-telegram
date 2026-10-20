@@ -73,4 +73,4 @@ export const chatReducer = (chats: Chat[], action: ChatAction): Chat[] => {
             });
         }
     }
-}
+};

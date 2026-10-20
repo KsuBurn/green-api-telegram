@@ -31,7 +31,7 @@ export const ChatWorkspace: FC<ChatWorkspaceProps> = ({ onLogout }) => {
     const chat = chats.find((item) => item.id === activeId);
 
     return (
-        <main className={styles.workspace}>
+        <main className={`${styles.workspace} ${chat ? styles.chatOpen : ''}`}>
             <aside className={styles.sidebar}>
                 <div className={styles.sidebarHeader}>
                     <TelegramFilled className={styles.smallBrand} />

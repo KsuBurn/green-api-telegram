@@ -1,6 +1,7 @@
 .messageList {
     display: flex;
     flex: 1;
+    min-height: 0;
     flex-direction: column;
     gap: 8px;
     overflow-y: auto;
@@ -94,7 +95,8 @@
 
 .composer {
     display: flex;
-    align-items: flex-start;
+    flex-shrink: 0;
+    align-items: flex-end;
     gap: 12px;
     width: min(100% - 48px, 720px);
     margin: 8px auto 20px;
@@ -156,13 +158,5 @@
 
     .draftHint {
         font-size: 8px;
-    }
-
-    .composer .sendButton {
-        flex-shrink: 0;
-        min-width: 56px;
-        width: 56px;
-        height: 56px;
-        font-size: 24px;
     }
 }

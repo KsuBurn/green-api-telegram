@@ -3,8 +3,84 @@
     flex-direction: column;
     min-width: 0;
     min-height: 0;
-    background-color: #c7dbba;
-    background-image:
-        url('../assets/chat-pattern.svg'),
-        linear-gradient(135deg, #d9deb0 0%, #a7cbaa 48%, #d4dfa9 100%);
+    overflow: hidden;
+    background: linear-gradient(135deg, #d9deb0 0%, #a7cbaa 48%, #d4dfa9 100%);
+}
+
+.conversationHeader {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 12px;
+    min-height: 76px;
+    padding: 12px 24px;
+    border-bottom: 1px solid #dfe1e5;
+    background: #fff;
+}
+
+.conversationHeader > div {
+    min-width: 0;
+}
+
+.conversationHeader h2 {
+    overflow: hidden;
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.conversationHeader p {
+    margin: 4px 0 0;
+    color: #707579;
+    font-size: 12px;
+}
+
+.conversationHeader .backButton {
+    display: none;
+    flex-shrink: 0;
+}
+
+.headerPill {
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.banner {
+    flex-shrink: 0;
+    margin: 12px 24px 0;
+    overflow-wrap: anywhere;
+}
+
+.welcome {
+    margin: auto;
+    padding: 32px 24px;
+    text-align: center;
+}
+
+.welcome p {
+    max-width: 360px;
+    color: #456048;
+    line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+    .conversationHeader {
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .conversationHeader .backButton {
+        display: inline-flex;
+    }
+
+    .headerPill {
+        display: none;
+    }
+
+    .banner {
+        margin: 8px 12px 0;
+    }
 }

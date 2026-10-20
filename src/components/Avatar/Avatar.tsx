@@ -1,4 +1,4 @@
-import type { FC } from 'react'
+import type { FC } from 'react';
 import { Avatar as AntAvatar } from 'antd';
 import styles from './Avatar.module.css';
 
@@ -13,5 +13,5 @@ export const Avatar: FC<AvatarProps> = ({ name }) => {
         <AntAvatar size={48} className={styles.avatar} aria-hidden="true">
             {initials}
         </AntAvatar>
-    )
-}
+    );
+};

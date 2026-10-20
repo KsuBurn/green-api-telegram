@@ -1,73 +1,28 @@
-# React + TypeScript + Vite
+# Telegram Chat · GREEN-API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Минимальный веб-интерфейс для отправки и получения текстовых сообщений в Telegram. Тестовое задание на React: Telegram выбран как разрешённая условиями альтернатива MAX, интеграция реализована через **GREEN-API**, а не Telegram Bot API.
 
-Currently, two official plugins are available:
+**Стек:** React, TypeScript, Vite, Ant Design, CSS Modules, Fetch API. Проверки: Vitest, React Testing Library, ESLint, GitHub Actions.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Быстрый старт
 
-## React Compiler
+Требуется Node.js **22.12+** (рекомендуется Node 22 LTS) и npm.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-    globalIgnores(['dist']),
-    {
-        files: ['**/*.{ts,tsx}'],
-        extends: [
-            // Other configs...
-
-            // Remove tseslint.configs.recommended and replace with this
-            tseslint.configs.recommendedTypeChecked,
-            // Alternatively, use this for stricter rules
-            tseslint.configs.strictTypeChecked,
-            // Optionally, add this for stylistic rules
-            tseslint.configs.stylisticTypeChecked,
-
-            // Other configs...
-        ],
-        languageOptions: {
-            parserOptions: {
-                project: ['./tsconfig.node.json', './tsconfig.app.json'],
-                tsconfigRootDir: import.meta.dirname,
-            },
-            // other options...
-        },
-    },
-]);
+```bash
+npm ci
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Откройте адрес, который напечатает Vite (обычно http://localhost:5173).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+## Подключение реального Telegram
 
-export default defineConfig([
-    globalIgnores(['dist']),
-    {
-        files: ['**/*.{ts,tsx}'],
-        extends: [
-            // Other configs...
-            // Enable lint rules for React
-            reactX.configs['recommended-typescript'],
-            // Enable lint rules for React DOM
-            reactDom.configs.recommended,
-        ],
-        languageOptions: {
-            parserOptions: {
-                project: ['./tsconfig.node.json', './tsconfig.app.json'],
-                tsconfigRootDir: import.meta.dirname,
-            },
-            // other options...
-        },
-    },
-]);
-```
+1. Зарегистрируйтесь в [кабинете GREEN-API](https://console.green-api.com/) и создайте инстанс **Telegram**. Инстанс WhatsApp или MAX для этого проекта не подходит. Доступность инстанса и ограничения тарифа определяет GREEN-API.
+2. Авторизуйте свой Telegram-аккаунт в кабинете. Для QR-авторизации: Telegram → Настройки → Устройства → Подключить устройство. Дождитесь состояния `authorized`.
+3. В настройках инстанса включите **«Получать уведомления о входящих сообщениях и файлах»** (`incomingWebhook: "yes"`). Поле **webhookUrl должно быть пустым**, поскольку приложение использует HTTP API, а не webhook endpoint. После изменения настроек подождите около минуты.
+4. Скопируйте из кабинета `idInstance`, `apiTokenInstance`, `apiUrl` и введите их на странице подключения. `apiUrl` — хост из кабинета, например `https://4100.api.green-api.com`, без `/waInstance…`.
+5. Введите номер **получателя** в международном формате с кодом страны, например `+79991234567`, и нажмите «Создать чат». Это не номер вашего инстанса. Приложение вызывает `checkAccount`, получает Telegram `chatId` и использует его для отправки.
+6. Напишите сообщение. Получатель увидит его в Telegram от аккаунта, подключённого к инстансу.
+7. Попросите получателя ответить именно этому аккаунту. Ответ автоматически появится в веб-интерфейсе.
+
+Если Telegram не позволяет найти человека по номеру из-за настроек приватности, создайте чат по его `@username`.

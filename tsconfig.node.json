@@ -6,14 +6,14 @@
         "types": ["node"],
         "skipLibCheck": true,
 
-        /* Bundler mode */
+        /* Настройки для сборщика */
         "module": "nodenext",
         "allowImportingTsExtensions": true,
         "verbatimModuleSyntax": true,
         "moduleDetection": "force",
         "noEmit": true,
 
-        /* Linting */
+        /* Проверки качества кода */
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "erasableSyntaxOnly": true,

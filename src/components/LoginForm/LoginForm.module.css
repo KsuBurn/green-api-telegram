@@ -37,11 +37,6 @@
     line-height: 1.7;
     margin: 22px 0 0;
 }
-.loginFooter {
-    font-size: 11px;
-    color: #8a9095;
-    margin-top: 24px;
-}
 @media (max-width: 600px) {
     .loginCard {
         padding: 24px 8px;

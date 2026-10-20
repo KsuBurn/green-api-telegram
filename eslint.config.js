@@ -24,7 +24,7 @@ export default defineConfig([
         },
 
         rules: {
-            // JavaScript
+            // Правила для JavaScript
             'no-console': ['warn', { allow: ['warn', 'error'] }],
             'no-debugger': 'error',
             eqeqeq: ['error', 'always'],
@@ -32,7 +32,7 @@ export default defineConfig([
             'prefer-const': 'error',
             'no-var': 'error',
 
-            // TypeScript
+            // Правила для TypeScript
             '@typescript-eslint/no-explicit-any': 'warn',
             '@typescript-eslint/no-unused-vars': [
                 'warn',
@@ -43,7 +43,7 @@ export default defineConfig([
                 },
             ],
 
-            // React
+            // Правила для React
             'react-hooks/exhaustive-deps': 'warn',
         },
     },

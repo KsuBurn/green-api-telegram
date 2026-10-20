@@ -3,7 +3,7 @@ import { ApiError } from './apiError';
 interface HttpClientOptions {
     baseUrl: string;
     headers?: HeadersInit;
-    timeout?: number; // ms
+    timeout?: number; // мс
     errorMessages?: Record<number, string>;
     networkErrorMessage?: string;
 }
@@ -60,7 +60,7 @@ export class HttpClient {
             });
 
             if (!response.ok) {
-                // Server error bodies may contain credentials in a request URL.
+                // Тело ошибки сервера может содержать учётные данные в URL запроса.
                 throw new ApiError(
                     this.errorMessages[response.status] ??
                         `Ошибка сервера (${response.status}). Попробуйте позже.`,

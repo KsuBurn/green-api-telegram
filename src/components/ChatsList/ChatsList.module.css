@@ -1,5 +1,53 @@
 .chatList {
     flex: 1;
-    overflow: auto;
+    min-height: 0;
+    overflow-y: auto;
     padding: 8px;
+}
+
+.chatList .chatItem {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    width: 100%;
+    height: 76px;
+    padding: 12px;
+    border: 0;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.chatList .chatItem.active {
+    background: #e8f3ff;
+}
+
+.chatSummary {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.chatName,
+.chatPreview {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chatName {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.chatPreview {
+    color: #707579;
+    font-size: 13px;
+}
+
+.noChats {
+    margin: 48px 16px;
 }

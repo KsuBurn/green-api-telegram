@@ -17,7 +17,7 @@ export const delay = (ms: number, signal: AbortSignal): Promise<void> => {
         }, ms);
         signal.addEventListener('abort', onAbort, { once: true });
     });
-}
+};
 
 export const pollNotifications = async (
     api: ChatApi,
@@ -25,7 +25,6 @@ export const pollNotifications = async (
     onNotification: (notification: Notification) => void,
     onStatus: (error: string | null, stopped?: boolean) => void,
 ) => {
-    let failures = 0;
     while (!signal.aborted) {
         try {
             const notification = await api.receiveNotification(signal);
@@ -36,10 +35,7 @@ export const pollNotifications = async (
                 onNotification(notification);
                 await api.deleteNotification(notification.receiptId, signal);
             }
-            failures = 0;
             onStatus(null);
-            // Also guards against an upstream server returning immediate empty responses.
-            await delay(350, signal);
         } catch (error) {
             if (signal.aborted) {
                 return;
@@ -49,12 +45,11 @@ export const pollNotifications = async (
             if (fatal) {
                 return;
             }
-            failures++;
             try {
-                await delay(Math.min(1000 * 2 ** Math.min(failures, 5), 30_000), signal);
+                await delay(3000, signal);
             } catch {
                 return;
             }
         }
     }
-}
+};

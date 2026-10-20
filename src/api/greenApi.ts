@@ -64,11 +64,13 @@ class GreenApi implements ChatApi {
             signal,
             body: normalizeRecipient(value),
         });
-        if (isRecord(result) && result.status === false) {
+        if (!isRecord(result)) {
+            throw new Error('Получатель не найден или его номер скрыт. Попробуйте @username.');
+        }
+        if (result.status === false) {
             throw new Error('Поиск недоступен. Проверьте авторизацию и ограничения Telegram.');
         }
         if (
-            !isRecord(result) ||
             result.exist !== true ||
             typeof result.chatId !== 'string' ||
             !result.chatId

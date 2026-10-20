@@ -2,10 +2,10 @@ import type { FC } from 'react';
 import styles from './ChatConversationSpace.module.css';
 import { Button, Tag } from 'antd';
 import type { Chat } from '../../types.ts';
-import { ArrowLeftOutlined, SendOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage.tsx';
 import { Conversation } from '../Conversation/Conversation.tsx';
-import { Avatar } from '../Avatar/Avatar.tsx'
+import { Avatar } from '../Avatar/Avatar.tsx';
 
 interface ChatConversationSpaceProps {
     chat: Chat | undefined;
@@ -74,14 +74,6 @@ export const ChatConversationSpace: FC<ChatConversationSpaceProps> = ({
                 <Conversation key={chat.id} chat={chat} sending={sending} onSend={send} />
             ) : (
                 <div className={styles.welcome}>
-                    <div className={styles.welcomeIcon} aria-hidden="true">
-                        <SendOutlined />
-                    </div>
-                    <h2>
-                        Каждый разговор
-                        <br />
-                        начинается с «Привет»
-                    </h2>
                     <p>Создайте чат по номеру телефона или выберите диалог слева.</p>
                     <Button type="primary" onClick={() => setShowNewChatForm(true)}>
                         Начать разговор

@@ -38,7 +38,7 @@ export const LoginForm: FC<LoginFormProps> = ({ onConnect }) => {
             connectionLock.current = false;
             setIsConnecting(false);
         }
-    }
+    };
 
     return (
         <main className={styles.loginPage}>

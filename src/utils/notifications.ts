@@ -44,4 +44,4 @@ export const parseIncoming = (body: unknown): { message: Message; name: string }
             status: 'queued',
         },
     };
-}
+};

@@ -49,7 +49,7 @@ export const useChat = () => {
         }
         dispatch({ type: 'chat', ...chat });
         setActiveId(chat.id);
-    }
+    };
 
     const send = async (text: string): Promise<boolean> => {
         if (!activeId || sendLock.current || !text.trim() || text.length > 4096) {
@@ -93,7 +93,7 @@ export const useChat = () => {
                 setSending(false);
             }
         }
-    }
+    };
     return {
         chats,
         activeId,
@@ -106,4 +106,4 @@ export const useChat = () => {
         stopped,
         restartPolling: () => setPollVersion((value) => value + 1),
     };
-}
+};

@@ -1,4 +1,6 @@
-export const normalizeRecipient = (value: string): { phoneNumber: number } | { username: string } => {
+export const normalizeRecipient = (
+    value: string,
+): { phoneNumber: number } | { username: string } => {
     const input = value.trim();
     if (/^@[a-zA-Z][a-zA-Z0-9_]{4,31}$/.test(input)) {
         return { username: input };
@@ -11,7 +13,7 @@ export const normalizeRecipient = (value: string): { phoneNumber: number } | { u
         throw new Error('Номер должен содержать от 7 до 15 цифр и код страны.');
     }
     return { phoneNumber: Number(digits) };
-}
+};
 
 export const validateApiUrl = (value: string): string => {
     let url: URL;
@@ -20,7 +22,7 @@ export const validateApiUrl = (value: string): string => {
     } catch {
         throw new Error('Введите корректный apiUrl из кабинета GREEN-API.');
     }
-    // Credentials must never be sent to an arbitrary user-provided host.
+    // Учётные данные нельзя отправлять на произвольный сервер, указанный пользователем.
     if (
         url.protocol !== 'https:' ||
         !/^(?:\d+\.api|api)\.green-api\.com$/.test(url.hostname) ||
@@ -36,11 +38,11 @@ export const validateApiUrl = (value: string): string => {
         );
     }
     return url.origin;
-}
+};
 
 export const isRecord = (value: unknown): value is Record<string, unknown> => {
     return typeof value === 'object' && value !== null && !Array.isArray(value);
-}
+};
 export const errorMessage = (error: unknown): string => {
     return error instanceof Error ? error.message : 'Не удалось выполнить запрос.';
-}
+};

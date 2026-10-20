@@ -6,7 +6,6 @@ import { Button, Input } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
 import type { FormEvent, KeyboardEvent } from 'react';
 
-
 interface ConversationProps {
     chat: Chat;
     sending: boolean;
@@ -39,7 +38,7 @@ export const Conversation: FC<ConversationProps> = ({ chat, sending, onSend }) =
         if (list) {
             shouldScrollRef.current = list.scrollHeight - list.scrollTop - list.clientHeight < 100;
         }
-    }
+    };
 
     const sendMessage = async () => {
         if (!draft.trim() || draft.length > 4096 || sending) {
@@ -53,19 +52,19 @@ export const Conversation: FC<ConversationProps> = ({ chat, sending, onSend }) =
         }
 
         textareaRef.current?.focus();
-    }
+    };
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         void sendMessage();
-    }
+    };
 
     const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
             event.preventDefault();
             void sendMessage();
         }
-    }
+    };
 
     return (
         <>
